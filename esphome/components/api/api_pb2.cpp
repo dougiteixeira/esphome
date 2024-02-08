@@ -2781,11 +2781,12 @@ void ListEntitiesTextSensorResponse::dump_to(std::string &out) const {
   out.append("  entity_category: ");
   out.append(proto_enum_to_string<enums::EntityCategory>(this->entity_category));
   out.append("\n");
-  out.append("}");
 
   out.append("  device_class: ");
   out.append("'").append(this->device_class).append("'");
   out.append("\n");
+  
+  out.append("}");
 }
 #endif
 bool TextSensorStateResponse::decode_varint(uint32_t field_id, ProtoVarInt value) {
