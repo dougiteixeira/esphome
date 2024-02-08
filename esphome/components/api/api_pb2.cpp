@@ -2721,7 +2721,7 @@ bool ListEntitiesTextSensorResponse::decode_length(uint32_t field_id, ProtoLengt
       this->icon = value.as_string();
       return true;
     }
-    case 9: {
+    case 8: {
       this->device_class = value.as_string();
       return true;
     }
