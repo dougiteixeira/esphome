@@ -31,8 +31,10 @@ namespace text_sensor {
  public: \
   void set_##name##_text_sensor(text_sensor::TextSensor *text_sensor) { this->name##_text_sensor_ = text_sensor; }
 
-class TextSensor : public EntityBase_DeviceClass, public EntityBase {
+class TextSensor : public EntityBase, public EntityBase_DeviceClass {
  public:
+  explicit TextSensor();
+
   /// Getter-syntax for .state.
   std::string get_state() const;
   /// Getter-syntax for .raw_state
