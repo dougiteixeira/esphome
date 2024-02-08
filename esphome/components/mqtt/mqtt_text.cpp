@@ -34,8 +34,8 @@ std::string MQTTTextComponent::component_type() const { return "text"; }
 const EntityBase *MQTTTextComponent::get_entity() const { return this->text_; }
 
 void MQTTTextComponent::send_discovery(JsonObject root, mqtt::SendDiscoveryConfig &config) {
-  if (!this->text_sensor_->get_device_class().empty())
-    root[MQTT_DEVICE_CLASS] = this->text_sensor_->get_device_class();
+  if (!this->text_->get_device_class().empty())
+    root[MQTT_DEVICE_CLASS] = this->text_->get_device_class();
   switch (this->text_->traits.get_mode()) {
     case TEXT_MODE_TEXT:
       root[MQTT_MODE] = "text";
