@@ -26,6 +26,8 @@ void MQTTTextSensor::dump_config() {
 
 bool MQTTTextSensor::publish_state(const std::string &value) { return this->publish(this->get_state_topic_(), value); }
 bool MQTTTextSensor::send_initial_state() {
+  if (!this->sensor_->get_device_class().empty())
+    root[MQTT_DEVICE_CLASS] = this->sensor_->get_device_class();
   if (this->sensor_->has_state()) {
     return this->publish_state(this->sensor_->state);
   } else {
