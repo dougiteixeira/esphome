@@ -1,6 +1,8 @@
 #include "mqtt_text_sensor.h"
 #include "esphome/core/log.h"
 
+#include "mqtt_const.h"
+
 #ifdef USE_MQTT
 #ifdef USE_TEXT_SENSOR
 
@@ -13,6 +15,8 @@ using namespace esphome::text_sensor;
 
 MQTTTextSensor::MQTTTextSensor(TextSensor *sensor) : sensor_(sensor) {}
 void MQTTTextSensor::send_discovery(JsonObject root, mqtt::SendDiscoveryConfig &config) {
+  if (!this->sensor_->get_device_class().empty())
+    root[MQTT_DEVICE_CLASS] = this->sensor_->get_device_class();
   config.command_topic = false;
 }
 void MQTTTextSensor::setup() {
@@ -26,8 +30,6 @@ void MQTTTextSensor::dump_config() {
 
 bool MQTTTextSensor::publish_state(const std::string &value) { return this->publish(this->get_state_topic_(), value); }
 bool MQTTTextSensor::send_initial_state() {
-  if (!this->sensor_->get_device_class().empty())
-    root[MQTT_DEVICE_CLASS] = this->sensor_->get_device_class();
   if (this->sensor_->has_state()) {
     return this->publish_state(this->sensor_->state);
   } else {
