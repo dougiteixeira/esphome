@@ -711,6 +711,7 @@ class ListEntitiesTextSensorResponse : public ProtoMessage {
   std::string name{};
   std::string unique_id{};
   std::string icon{};
+  std::string device_class{};
   bool disabled_by_default{false};
   enums::EntityCategory entity_category{};
   void encode(ProtoWriteBuffer buffer) const override;

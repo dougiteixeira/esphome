@@ -6,6 +6,7 @@
 #ifdef USE_TEXT_SENSOR
 
 #include "esphome/components/text_sensor/text_sensor.h"
+#include "mqtt_const.h"
 #include "mqtt_component.h"
 
 namespace esphome {
@@ -17,8 +18,8 @@ class MQTTTextSensor : public mqtt::MQTTComponent {
 
   void send_discovery(JsonObject root, mqtt::SendDiscoveryConfig &config) {
   config.state_topic = false;
-  if (!this->text_sensor_->get_device_class().empty())
-    root[MQTT_DEVICE_CLASS] = this->text_sensor_->get_device_class();
+  if (!this->sensor_->get_device_class().empty())
+    root[MQTT_DEVICE_CLASS] = this->sensor_->get_device_class();
 }
 
   void setup() override;
