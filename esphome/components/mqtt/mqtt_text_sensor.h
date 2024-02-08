@@ -15,7 +15,11 @@ class MQTTTextSensor : public mqtt::MQTTComponent {
  public:
   explicit MQTTTextSensor(text_sensor::TextSensor *sensor);
 
-  void send_discovery(JsonObject root, mqtt::SendDiscoveryConfig &config) override;
+  void send_discovery(JsonObject root, mqtt::SendDiscoveryConfig &config) {
+  config.state_topic = false;
+  if (!this->text_sensor_->get_device_class().empty())
+    root[MQTT_DEVICE_CLASS] = this->text_sensor_->get_device_class();
+}
 
   void setup() override;
 
