@@ -541,9 +541,9 @@ bool APIConnection::send_text_sensor_info(text_sensor::TextSensor *text_sensor) 
   if (msg.unique_id.empty())
     msg.unique_id = get_default_unique_id("text_sensor", text_sensor);
   msg.icon = text_sensor->get_icon();
-  msg.device_class = text_sensor->get_device_class();
   msg.disabled_by_default = text_sensor->is_disabled_by_default();
   msg.entity_category = static_cast<enums::EntityCategory>(text_sensor->get_entity_category());
+  msg.device_class = text_sensor->get_device_class();
   return this->send_list_entities_text_sensor_response(msg);
 }
 #endif
