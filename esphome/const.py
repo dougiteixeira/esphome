@@ -240,6 +240,7 @@ CONF_ENABLE_TIME = "enable_time"
 CONF_ENERGY = "energy"
 CONF_ENTITY_CATEGORY = "entity_category"
 CONF_ENTITY_ID = "entity_id"
+CONF_ENTRY_TYPE = "entry_type"
 CONF_ENUM_DATAPOINT = "enum_datapoint"
 CONF_EQUATION = "equation"
 CONF_ESP8266_DISABLE_SSL_SUPPORT = "esp8266_disable_ssl_support"
@@ -415,6 +416,7 @@ CONF_MAGNITUDE = "magnitude"
 CONF_MAINS_FILTER = "mains_filter"
 CONF_MAKE_ID = "make_id"
 CONF_MANUAL_IP = "manual_ip"
+CONF_MANUFACTURER = "manufacturer"
 CONF_MANUFACTURER_ID = "manufacturer_id"
 CONF_MASK_DISTURBER = "mask_disturber"
 CONF_MAX_BRIGHTNESS = "max_brightness"
@@ -1117,3 +1119,8 @@ ENTITY_CATEGORY_CONFIG = "config"
 
 # The entity category for read only diagnostic values, for example RSSI, uptime or MAC Address
 ENTITY_CATEGORY_DIAGNOSTIC = "diagnostic"
+
+# The type of entry of device properties.
+ENTRY_TYPE_OPTIONS = {
+    "SERVICE": "service",
+}
