@@ -13,7 +13,7 @@ MULTI_CONF = True
 
 CONF_MANUFACTURER = "manufacturer"
 ENTRY_TYPE_OPTIONS = {
-    "EVEN": "service",
+    "SERVICE": "service",
 }
 
 CONFIG_SCHEMA = cv.Schema(
