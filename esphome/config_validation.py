@@ -139,6 +139,7 @@ RESERVED_IDS = [
     "decltype",
     "default",
     "delete",
+    "device",
     "do",
     "double",
     "dynamic_cast",

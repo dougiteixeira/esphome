@@ -30,3 +30,5 @@ async def to_code(config):
     cg.add(var.set_name(config[CONF_NAME]))
     cg.add(var.set_manufacturer(config[CONF_MANUFACTURER]))
     cg.add(var.set_entry_type(config[CONF_ENTRY_TYPE]))
+
+    cg.add_define("USE_DEVICE")
