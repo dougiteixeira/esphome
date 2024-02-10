@@ -1,17 +1,20 @@
 import esphome.codegen as cg
 import esphome.config_validation as cv
 from esphome.const import (
-    CONF_ENTRY_TYPE,
     CONF_ID,
-    CONF_MANUFACTURER,
     CONF_NAME,
-    ENTRY_TYPE_OPTIONS,
 )
 
 CODEOWNERS = ["@esphome/core"]
 device_ns = cg.esphome_ns.namespace("device")
 Device = device_ns.class_("Device", cg.Component)
 MULTI_CONF = True
+
+CONF_MANUFACTURER = "manufacturer"
+CONF_ENTRY_TYPE = "entry_type"
+ENTRY_TYPE_OPTIONS = {
+    "EVEN": "service",
+}
 
 CONFIG_SCHEMA = cv.Schema(
     {
