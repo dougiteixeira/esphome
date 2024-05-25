@@ -37,8 +37,13 @@ StateClass Sensor::get_state_class() {
 }
 
 void Sensor::publish_state(float state) {
-  this->raw_state = state;
-  this->raw_callback_.call(state);
+  if (state == NAN) {
+    this->raw_state = 'None';
+    this->raw_callback_.call('None');
+  } else {
+    this->raw_state = state;
+    this->raw_callback_.call(state);
+  }
 
   ESP_LOGV(TAG, "'%s': Received new state %f", this->name_.c_str(), state);
 
