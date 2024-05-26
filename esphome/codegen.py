@@ -70,6 +70,7 @@ from esphome.cpp_types import (  # noqa
     size_t,
     const_char_ptr,
     NAN,
+    PAYLOAD_NONE,
     esphome_ns,
     App,
     EntityBase,

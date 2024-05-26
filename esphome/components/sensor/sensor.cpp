@@ -20,7 +20,7 @@ std::string state_class_to_string(StateClass state_class) {
   }
 }
 
-Sensor::Sensor() : state('None'), raw_state(NAN) {}
+Sensor::Sensor() : state(PAYLOAD_NONE), raw_state(NAN) {}
 
 int8_t Sensor::get_accuracy_decimals() {
   if (this->accuracy_decimals_.has_value())

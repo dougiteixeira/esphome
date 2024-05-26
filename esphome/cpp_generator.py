@@ -303,7 +303,7 @@ class FloatLiteral(Literal):
 
     def __str__(self):
         if math.isnan(self.f):
-            return "NAN"
+            return "None"
         return f"{self.f}f"
 
 

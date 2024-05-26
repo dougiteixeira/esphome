@@ -20,6 +20,7 @@ int64 = global_ns.namespace("int64_t")
 size_t = global_ns.namespace("size_t")
 const_char_ptr = global_ns.namespace("const char *")
 NAN = global_ns.namespace("NAN")
+PAYLOAD_NONE = global_ns.namespace("None")
 esphome_ns = global_ns  # using namespace esphome;
 App = esphome_ns.App
 EntityBase = esphome_ns.class_("EntityBase")
