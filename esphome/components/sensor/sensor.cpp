@@ -20,7 +20,7 @@ std::string state_class_to_string(StateClass state_class) {
   }
 }
 
-Sensor::Sensor() : state(NAN), raw_state(NAN) {}
+Sensor::Sensor() : state('None'), raw_state(NAN) {}
 
 int8_t Sensor::get_accuracy_decimals() {
   if (this->accuracy_decimals_.has_value())
@@ -37,13 +37,8 @@ StateClass Sensor::get_state_class() {
 }
 
 void Sensor::publish_state(float state) {
-  if (state == NAN) {
-    this->raw_state = 'None';
-    this->raw_callback_.call('None');
-  } else {
-    this->raw_state = state;
-    this->raw_callback_.call(state);
-  }
+  this->raw_state = state;
+  this->raw_callback_.call(state);
 
   ESP_LOGV(TAG, "'%s': Received new state %f", this->name_.c_str(), state);
 
