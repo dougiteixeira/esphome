@@ -33,7 +33,7 @@ static const char *const TAG = "mqtt";
 static constexpr uint8_t MAX_RESENDS_PER_LOOP = 8;
 
 // Disconnect reason strings indexed by MQTTClientDisconnectReason enum (0-8)
-PROGMEM_STRING_TABLE(MQTTDisconnectReasonStrings, "TCP disconnected", "Unacceptable Protocol Version",
+PROGMEM_STRING_TABLE(MQTTDisconnectReasonStrings, "TCPx disconnected", "Unacceptable Protocol Version",
                      "Identifier Rejected", "Server Unavailable", "Malformed Credentials", "Not Authorized",
                      "Not Enough Space", "TLS Bad Fingerprint", "DNS Resolve Error", "Unknown");
 
