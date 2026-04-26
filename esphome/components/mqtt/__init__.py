@@ -50,12 +50,10 @@ from esphome.const import (
     CONF_SUBSCRIBE_QOS,
     CONF_TOPIC,
     CONF_TOPIC_PREFIX,
-    CONF_TRANSPORT,
     CONF_TRIGGER_ID,
     CONF_USE_ABBREVIATIONS,
     CONF_USERNAME,
     CONF_WILL_MESSAGE,
-    CONF_WS_PATH,
     PLATFORM_BK72XX,
     PLATFORM_ESP32,
     PLATFORM_ESP8266,
@@ -76,7 +74,9 @@ def AUTO_LOAD():
 
 CONF_DISCOVER_IP = "discover_ip"
 CONF_IDF_SEND_ASYNC = "idf_send_async"
+CONF_TRANSPORT = "transport"
 CONF_WAIT_FOR_CONNECTION = "wait_for_connection"
+CONF_WS_PATH = "ws_path"
 
 # Max lengths for stack-based topic building.
 # These values are used in cv.Length() validators below to ensure the C++ code
@@ -481,7 +481,7 @@ async def to_code(config):
         # Set WebSocket path only for WebSocket transports
         if transport in ["ws", "wss"]:
             cg.add(var.set_ws_path(config[CONF_WS_PATH]))
-            
+
     for conf in config.get(CONF_ON_MESSAGE, []):
         trig = cg.new_Pvariable(conf[CONF_TRIGGER_ID], conf[CONF_TOPIC])
         cg.add(trig.set_qos(conf[CONF_QOS]))
