@@ -13,6 +13,7 @@
 #include "esphome/core/helpers.h"
 #include "esphome/core/lock_free_queue.h"
 #include "esphome/core/log.h"
+#ifdef USE_LOGGER
 #include "esphome/core/event_pool.h"
 
 namespace esphome::mqtt {
