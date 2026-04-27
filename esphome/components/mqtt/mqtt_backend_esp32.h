@@ -12,6 +12,7 @@
 #include "esphome/components/network/ip_address.h"
 #include "esphome/core/helpers.h"
 #include "esphome/core/lock_free_queue.h"
+#include "esphome/core/log.h"
 #include "esphome/core/event_pool.h"
 
 namespace esphome::mqtt {
