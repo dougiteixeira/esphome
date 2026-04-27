@@ -69,6 +69,8 @@ bool MQTTBackendESP32::initialize_() {
     mqtt_cfg_.credentials.authentication.key = this->cl_key_.value().c_str();
   }
 
+
+  ESP_LOGE(TAG, "mqtt_cfg_", &mqtt_cfg_);
   auto *mqtt_client = esp_mqtt_client_init(&mqtt_cfg_);
   if (mqtt_client) {
     handler_.reset(mqtt_client);
