@@ -74,7 +74,9 @@ def AUTO_LOAD():
 
 CONF_DISCOVER_IP = "discover_ip"
 CONF_IDF_SEND_ASYNC = "idf_send_async"
+CONF_TRANSPORT = "transport"
 CONF_WAIT_FOR_CONNECTION = "wait_for_connection"
+CONF_WS_PATH = "ws_path"
 
 # Max lengths for stack-based topic building.
 # These values are used in cv.Length() validators below to ensure the C++ code
@@ -216,6 +218,22 @@ def validate_config(value):
             out[CONF_LOG_TOPIC] = {}
     return out
 
+def validate_transport(config):
+    """Validate WebSocket transport is only used on ESP32 with ESP-IDF."""
+    if CONF_TRANSPORT in config:
+        transport = config[CONF_TRANSPORT]
+        if transport in ["ws", "wss"]:
+            if not CORE.is_esp32:
+                raise cv.Invalid(
+                    "WebSocket transport (ws/wss) is only supported on ESP32 platform"
+                )
+            if CORE.using_esp_idf is False:
+                raise cv.Invalid(
+                    "WebSocket transport (ws/wss) requires ESP-IDF framework. "
+                    "Please use 'framework: type: esp-idf' in your esp32 configuration."
+                )
+    return config
+
 
 def _consume_mqtt_sockets(config: ConfigType) -> ConfigType:
     """Register socket needs for MQTT component."""
@@ -250,6 +268,10 @@ CONFIG_SCHEMA = cv.All(
             cv.SplitDefault(CONF_SKIP_CERT_CN_CHECK, esp32=False): cv.All(
                 cv.boolean, cv.only_on_esp32
             ),
+            cv.Optional(CONF_TRANSPORT, default="tcp"): cv.enum(
+                {"tcp": "tcp", "ws": "ws", "wss": "wss"}, lower=True
+            ),
+            cv.Optional(CONF_WS_PATH, default="/mqtt"): cv.string,
             cv.Optional(CONF_DISCOVERY, default=True): cv.Any(
                 cv.boolean, cv.one_of("CLEAN", upper=True)
             ),
@@ -450,6 +472,15 @@ async def to_code(config):
     if CONF_IDF_SEND_ASYNC in config and config[CONF_IDF_SEND_ASYNC]:
         cg.add_define("USE_MQTT_IDF_ENQUEUE")
     # end esp-idf
+
+    # Configure transport for ESP32-IDF
+    if CORE.is_esp32 and CORE.using_esp_idf:
+        transport = config[CONF_TRANSPORT]
+        # Always set transport to ensure it's configured correctly
+        cg.add(var.set_transport(transport))
+        # Set WebSocket path only for WebSocket transports
+        if transport in ["ws", "wss"]:
+            cg.add(var.set_ws_path(config[CONF_WS_PATH]))
 
     for conf in config.get(CONF_ON_MESSAGE, []):
         trig = cg.new_Pvariable(conf[CONF_TRIGGER_ID], conf[CONF_TOPIC])
