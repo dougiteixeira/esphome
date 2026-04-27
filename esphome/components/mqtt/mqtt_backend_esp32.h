@@ -12,8 +12,6 @@
 #include "esphome/components/network/ip_address.h"
 #include "esphome/core/helpers.h"
 #include "esphome/core/lock_free_queue.h"
-#include "esphome/core/log.h"
-#ifdef USE_LOGGER
 #include "esphome/core/event_pool.h"
 
 namespace esphome::mqtt {
@@ -242,8 +240,6 @@ class MQTTBackendESP32 final : public MQTTBackend {
 
   bool is_connected_{false};
   bool is_initalized_{false};
-
-  ESP_LOGW("TESTE", "esp_mqtt_client_config_t: %s", mqtt_cfg_);
 
   esp_mqtt_client_config_t mqtt_cfg_{};
 
