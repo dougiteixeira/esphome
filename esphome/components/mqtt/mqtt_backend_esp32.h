@@ -241,6 +241,8 @@ class MQTTBackendESP32 final : public MQTTBackend {
   bool is_connected_{false};
   bool is_initalized_{false};
 
+  ESP_LOGW("TESTE", "esp_mqtt_client_config_t: %s", mqtt_cfg_);
+
   esp_mqtt_client_config_t mqtt_cfg_{};
 
   std::string host_;
